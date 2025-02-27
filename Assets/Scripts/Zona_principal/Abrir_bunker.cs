@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Abrir_bunker : MonoBehaviour
@@ -10,6 +11,11 @@ public class Abrir_bunker : MonoBehaviour
     public bool zona;
 
     public bool activo = false;
+
+    [SerializeField] GameObject p1;
+    [SerializeField] GameObject p2;
+
+    public bool mover = false;
     void Start()
     {
         
@@ -47,13 +53,25 @@ public class Abrir_bunker : MonoBehaviour
         gem_4 = true;
     }
 
-    // Update is called once per frame
+    IEnumerator conteo(int i) {
+
+        yield return new WaitForSeconds(1.5f);
+
+        mover = false;    
+      }
     void Update()
     {
         if (gem_1 && gem_2 && gem_3 && gem_4 && activo == false && zona && Input.GetKeyDown(KeyCode.E))
         {
-            print("hola");
+            mover = true;
             activo = true;
+            StartCoroutine(conteo(0));
+        }
+        if (mover) {
+        
+         p1.transform.Translate(Vector3.up * Time.deltaTime);
+         p2.transform.Translate(-Vector3.up * Time.deltaTime);
+        
         }
     }
 }

@@ -1,10 +1,11 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class Enemigo_2 : MonoBehaviour
 {
     public Transform objetivo;
-    //public Animator animator;
+    public Animator animator;
     public NavMeshAgent agent;
     public float distanceEnemy = 10f;
     private bool detected;
@@ -14,8 +15,15 @@ public class Enemigo_2 : MonoBehaviour
     {
         //animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
-    }
 
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            SceneManager.LoadScene(2);
+        }
+    }
     void Update()
     {
 
@@ -44,7 +52,7 @@ public class Enemigo_2 : MonoBehaviour
         }
 
         // Actualizar la animación
-        //animator.SetFloat("Speed", agent.velocity.magnitude);
+        animator.SetFloat("Speed", agent.velocity.magnitude);
     }
 
     void VisualDetect()

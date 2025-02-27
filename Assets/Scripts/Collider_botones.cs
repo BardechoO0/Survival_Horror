@@ -6,6 +6,8 @@ public class Collider_botones : MonoBehaviour
 {
     [SerializeField] GameObject IMG;
 
+    
+
     [SerializeField] Botones Bt;
 
     [SerializeField] Animator amin;
@@ -48,7 +50,7 @@ public class Collider_botones : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.E) && y && ativate == false)
         {
 
-            if (N_B == 1) { Bt.B1(); } else if (N_B == 2) { Bt.B2(); } else if (N_B == 3) { Bt.B3(); } else if (N_B == 4) { Bt.B3(); }
+            if (N_B == 1) { Bt.B1(); } else if (N_B == 2) { Bt.B2(); } else if (N_B == 3) { Bt.B3(); } else if (N_B == 4) { Bt.B4(); }
             amin.SetBool("Act",true);   
             ativate = true;
 

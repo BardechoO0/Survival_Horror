@@ -1,11 +1,15 @@
 using System.Collections;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class Enemigo_1 : MonoBehaviour
 {
     public Transform objetivo;
-    //public Animator anim;
+
+    public Animator animator;
+
     public NavMeshAgent agent;
 
     [SerializeField] Transform[] pz = new Transform[2];
@@ -70,6 +74,14 @@ public class Enemigo_1 : MonoBehaviour
         StartCoroutine(cambio(1));
         agent.speed = 1.5f;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            SceneManager.LoadScene(2);
+        }
+    }
     void Update()
     {
         
@@ -117,7 +129,9 @@ public class Enemigo_1 : MonoBehaviour
             x = false;
 
         }
-        
+
+        animator.SetFloat("Speed", agent.velocity.magnitude);
+
     }
     void VisualDetect()
     {
@@ -138,6 +152,8 @@ public class Enemigo_1 : MonoBehaviour
                     detected = true;
                 StartCoroutine(t());
                 agent.speed = 2f;
+
+                x= false;
                 
 
             }else if (hit.collider.CompareTag(null)&&track == false)
